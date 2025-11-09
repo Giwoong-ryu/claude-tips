@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "N8N AI Copilot",
+  "version": "0.2.6",
+  "description": "AI-powered assistant for N8N workflow automation",
+  
+  "permissions": [
+    "storage",
+    "activeTab",
+    "alarms"
+  ],
+  
+  "host_permissions": [
+    "https://app.n8n.cloud/*",
+    "http://localhost:5678/*",
+    "https://*.n8n.io/*",
+    "https://n8nryugw10.site/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.github.com/*",
+    "https://raw.githubusercontent.com/*",
+    "https://docs.n8n.io/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.n8n.cloud/*",
+        "http://localhost:5678/*",
+        "https://*.n8n.io/*",
+        "https://n8nryugw10.site/*"
+      ],
+      "js": ["sidebar.js", "content.js"],
+      "css": ["sidebar.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["sidebar.html", "sidebar-iframe.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
